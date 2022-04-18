@@ -26,7 +26,7 @@ public class ChatRoomController {
     @GetMapping("/room/enter/{roomId}")
     public String roomDetail(Model model, @PathVariable String roomId) {
         model.addAttribute("roomId", roomId);
-        return "roomdetail";
+        return "/chat/roomdetail";
     }
 
     // 모든 채팅방 목록 반환
@@ -41,6 +41,8 @@ public class ChatRoomController {
     public String rooms(Model model) {
         return "/chat/room";
     }
+
+
 
     // 채팅방 생성
     @PostMapping("/createroom")

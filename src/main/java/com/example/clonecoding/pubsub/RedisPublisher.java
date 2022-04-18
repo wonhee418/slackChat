@@ -25,16 +25,16 @@ public class RedisPublisher {
     //채팅방에 입장하여 메세지를 작성하면 해당 메세지를 Redis Topic에 발행하는 기능의 서비스.
     //메세지가 발행하면 대기하고있떤 redis가 구독 서비스 메세지를 처리함.
     public void publish(ChannelTopic topic, ChatMessageDto.Request message) {
-        User user = userRepository.findByNickname(message.getSender()).orElseThrow(
-                () -> new MessageDeliveryException("유효한 회원이 존재하지 않습니다.")
-        );
+//        User user = userRepository.findByNickname(message.getSender()).orElseThrow(
+//                () -> new MessageDeliveryException("유효한 회원이 존재하지 않습니다.")
+//        );
         ChatRoom chatRoom = chatRoomRepository.findRoomById(message.getRoomId());
         ChatMessage chatMessage = ChatMessage.builder()
                 .roomId(message.getRoomId())
                 .type(message.getType())
                 .sender(message.getSender())
                 .message(message.getMessage())
-                .imageUrl(user.getImageUrl())
+//                .imageUrl(user.getImageUrl())
                 .chatRoom(chatRoom)
                 .build();
         chatMessageRepository.save(chatMessage);

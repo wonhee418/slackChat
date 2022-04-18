@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <title>Websocket ChatRoom</title>
     <!-- Required meta tags -->
@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/dist/css/bootstrap.min.css">
     <style>
         [v-cloak] {
             display: none;
@@ -30,16 +30,16 @@
     </div>
     <ul class="list-group">
         <li class="list-group-item" v-for="message in messages">
-            {{message.sender}} - {{message.message}}</a>
+            <a>{{message.sender}} - {{message.message}}</a>
         </li>
     </ul>
     <div></div>
 </div>
 <!-- JavaScript -->
-<script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
-<script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
-<script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
-<script src="/webjars/stomp-websocket/2.3.3-1/stomp.min.js"></script>
+<script src="/webjars/vue/2.6.14/dist/vue.min.js"></script>
+<script src="/webjars/axios/0.21.1/dist/axios.min.js"></script>
+<script src="/webjars/sockjs-client/1.5.1/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/2.3.4/stomp.min.js"></script>
 <script>
     //alert(document.title);
     // websocket & stomp initialize
@@ -63,7 +63,7 @@
         },
         methods: {
             findRoom: function() {
-                axios.get('/chat/room/'+this.roomId).then(response => { this.room = response.data; });
+                axios.get('/chat/listlookup/'+this.roomId).then(response => { this.room = response.data; });
             },
             sendMessage: function() {
                 ws.send("/pub/chat/message", {}, JSON.stringify({type:'TALK', roomId:this.roomId, sender:this.sender, message:this.message}));
@@ -78,7 +78,7 @@
     function connect() {
         // pub/sub event
         ws.connect({}, function(frame) {
-            ws.subscribe("/sub/chat/room/"+vm.$data.roomId, function(message) {
+            ws.subscribe("/sub/chat/room/enter"+vm.$data.roomId, function(message) {
                 var recv = JSON.parse(message.body);
                 vm.recvMessage(recv);
             });
