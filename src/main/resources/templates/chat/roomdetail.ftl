@@ -29,11 +29,9 @@
         </div>
     </div>
     <ul class="list-group">
-        <a>
         <li class="list-group-item" v-for="message in messages">
-            {{message.sender}} - {{message.message}}
+            <a>{{message.sender}} - {{message.message}}</a>
         </li>
-        </a>
     </ul>
     <div></div>
 </div>
