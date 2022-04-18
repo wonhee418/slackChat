@@ -29,9 +29,11 @@
         </div>
     </div>
     <ul class="list-group">
+        <a>
         <li class="list-group-item" v-for="message in messages">
-            <a>{{message.sender}} - {{message.message}}</a>
+            {{message.sender}} - {{message.message}}
         </li>
+        </a>
     </ul>
     <div></div>
 </div>
@@ -70,18 +72,19 @@
                 this.message = '';
             },
             recvMessage: function(recv) {
-                this.messages.unshift({"type":recv.type,"sender":recv.type=='ENTER'?'[알림]':recv.sender,"message":recv.message})
+                this.messages.unshift({"type":recv.type,"sender":recv.type==='ENTER'?'[알림]':recv.sender,"message":recv.message})
             }
         }
     });
 
     function connect() {
         // pub/sub event
-        ws.connect({}, function(frame) {
-            ws.subscribe("/sub/chat/room/enter"+vm.$data.roomId, function(message) {
+        ws.connect({}, function(frame) {//26b21e78-53f0-4cab-b74d-c4c65300f41a
+            ws.subscribe("/sub/chat/room/enter/"+vm.$data.roomId, function(message) {
                 var recv = JSON.parse(message.body);
                 vm.recvMessage(recv);
             });
+
             ws.send("/pub/chat/message", {}, JSON.stringify({type:'ENTER', roomId:vm.$data.roomId, sender:vm.$data.sender}));
         }, function(error) {
             if(reconnect++ <= 5) {

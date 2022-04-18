@@ -32,7 +32,5 @@ public class ChatSerivce {
         }
         Collections.reverse(chatMessagedResponseDtoList);
         return chatMessagedResponseDtoList;
-
     }
-
 }

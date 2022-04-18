@@ -45,7 +45,7 @@ public class ChatRoomRepository {
     //채팅방 생성 : 서버간 채팅방 공유를 위해 redis hash에 저장한다.
     //채팅방 이름 , 채팅방의 uuid주소 , 채팅방을 레디스에 저장
     public void createChatRoom(ChatRoom chatRoom) {
-        opsHashChatRoom.put(CHAT_ROOMS, chatRoom.getChatRoomId() , chatRoom);
+        opsHashChatRoom.put(CHAT_ROOMS, chatRoom.getRoomId(), chatRoom);
     }
 
     //채팅방 입장 : redis에 topic을 만들고 pub/sub 통신을 하기 위해 리스너를 설정한다.

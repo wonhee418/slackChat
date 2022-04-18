@@ -27,14 +27,14 @@ public class ChatRoomService {
     @Transactional
     public void delete(String roomId) {
         ChatRoom chatRoom = chatRoomJpaRepository.findChatRoomByChatRoomId(roomId);
-        chatRoomRepository.deleteChatRoom(chatRoom.getChatRoomId());
+        chatRoomRepository.deleteChatRoom(chatRoom.getRoomId());
         chatRoomJpaRepository.delete(chatRoom);
     }
 
 
     public static ChatRoom create(String name) {
         ChatRoom chatRoom = new ChatRoom();
-        chatRoom.setChatRoomId(UUID.randomUUID().toString());
+        chatRoom.setRoomId(UUID.randomUUID().toString());
         chatRoom.setName(name);
         return chatRoom;
     }

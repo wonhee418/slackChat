@@ -8,11 +8,12 @@ import com.example.clonecoding.repository.ChatMessageRepository;
 import com.example.clonecoding.repository.ChatRoomRepository;
 import com.example.clonecoding.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
-import org.springframework.messaging.MessageDeliveryException;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class RedisPublisher {
@@ -28,6 +29,7 @@ public class RedisPublisher {
 //        User user = userRepository.findByNickname(message.getSender()).orElseThrow(
 //                () -> new MessageDeliveryException("유효한 회원이 존재하지 않습니다.")
 //        );
+        log.info(String.valueOf(message));
         ChatRoom chatRoom = chatRoomRepository.findRoomById(message.getRoomId());
         ChatMessage chatMessage = ChatMessage.builder()
                 .roomId(message.getRoomId())

@@ -14,7 +14,7 @@ public class ChatController {
 
     //websocket "/pub/chat/message"로 들어오는 메시징을 처리한다.
     //websocket "w"로 들어오는 메시징을 처리한다.
-    @MessageMapping("/templates/chat/message")
+    @MessageMapping("/chat/message")
     public void message(ChatMessageDto.Request message) {
         chatMessageService.joinMessage(message);
     }

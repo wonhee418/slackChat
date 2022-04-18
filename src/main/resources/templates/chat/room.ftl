@@ -52,6 +52,7 @@
             findAllRoom: function() {
                 axios.get('/chat/listlookup').then(response => { this.chatrooms = response.data; });
             },
+
             createRoom: function() {
                 if("" === this.room_name) {
                     alert("방 제목을 입력해 주십시요.");

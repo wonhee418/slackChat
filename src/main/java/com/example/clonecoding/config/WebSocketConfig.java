@@ -1,6 +1,7 @@
 package com.example.clonecoding.config;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
@@ -14,9 +15,10 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 //registerStompEndpoints : SockJs Fallback을 이용해 노출할 STOMP endpoint를 설정한다.
 //메시지 발행하는 prefix는 /pub로 시작하도록 설정하고 메시지를 구독하는 요청의 prefix는 /sub 시작하도록 설정했다.
 //stomp websocket의 연결 endpoint는 /ws-stomp 으로 설정했다.
+
+@Slf4j
 @RequiredArgsConstructor
 @Configuration
-@EnableWebSocket
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
@@ -26,6 +28,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         config.enableSimpleBroker("/sub");
         //메시지 발행요청은 prefix/pub
         config.setApplicationDestinationPrefixes("/pub");
+        log.info(String.valueOf(config));
     }
 
     @Override

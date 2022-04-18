@@ -1,11 +1,12 @@
 package com.example.clonecoding.model;
 
-import lombok.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,15 +14,15 @@ import java.util.UUID;
 @Data
 @Entity
 public class ChatRoom implements Serializable {
-    private static final long serialVersionUID = 6494678977089006639L;
 
+    private static final long serialVersionUID = 6494678977089006639L;
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private Long roomId;
+    private Long chatRoomId;
 
     @Column
-    private String chatRoomId;
+    private String roomId;
 
     @Column
     private String name;
